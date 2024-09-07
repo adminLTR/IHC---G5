@@ -1,6 +1,9 @@
 # Arquitectura
+## Diagrama de contexto
+![Diagrama de contexto](./Diagrama%20de%20contexto.png)
 
 ## Arquitectura de sistema
+![Diagrama de arquitectura](./Arquitectura%20del%20sistema.png)
 
 ## Arquitectura de software
 ### Arquitectura de aplicacion movil
