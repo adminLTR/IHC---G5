@@ -18,8 +18,12 @@
 | RF12 | La funcionalidad de deslogeo debe ser manual, no cuando se cierre la aplicación | Funcional | Media |
 | RF13 | La interfaz debe tener un panel donde muestre métricas de energía consumida en el dia, en la semana y en el mes | Funcional | Baja |
 
-
 ## Requisitos no funcionales
+
+| Codigo | Requisito | Tipo | Prioridad |
+| --- | ------- | ---- | --------- |
+| RNF1 | La velocidad de respuesta del servidor no debe exceder el medio segundo | No Funcional | Alta |
+<!-- | RNF2 |  -->
 
 ## Casos de uso
 
