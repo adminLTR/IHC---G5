@@ -1,6 +1,6 @@
 # BACKEND
 
-Este repositorio contiene el backend del proyecto, desarrollado en Django y otras tecnologías. A continuación, encontrarás las instrucciones necesarias para levantar el proyecto localmente, instalar las dependencias, y algunos recursos adicionales.
+Esta carpeta contiene el backend del proyecto, desarrollado en Django y otras tecnologías. A continuación, encontrarás las instrucciones necesarias para levantar el proyecto localmente, instalar las dependencias, y algunos recursos adicionales.
 
 
 ## Tecnologías Utilizadas
