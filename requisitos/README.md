@@ -17,6 +17,14 @@
 | RF11 | La sesión del usuario debe mantenerse abierta hasta que el usuario decida cerrarla manualmente | Funcional | Media |
 | RF12 | La funcionalidad de deslogeo debe ser manual, no cuando se cierre la aplicación | Funcional | Media |
 | RF13 | La interfaz debe tener un panel donde muestre métricas de energía consumida en el dia, en la semana y en el mes | Funcional | Baja |
+| RF14 | El usuario debe ser capaz de controlar la intesidad de encendido de sus focos | Funcional | Alta |
+| RF14 | El usuario debe ser capaz de programar horarios de encendido o apagado de sus dispositivos y luces | Funcional | Alta |
+| RF15 | El sistema debe permitir el manejo de apertura y cierre de puertas, restringiendo su apertura o cierre en ciertas horas del dia | Funcional | Alta |
+| RF16 | La aplicación debe visualizar información de la temperatura, humedad y calidad del aire del hogar | Funcional | Alta |
+| RF17 | La aplicación debe enviar notificaciones en caso de anomalias en los valores detectados de temperatura, humedad y calidad del aire | Funcional | Alta |
+| RF18 | El sistema debe permitir un sistema de riego inteligente y programable | Funcional | Media |
+
+
 
 ## Requisitos no funcionales
 
