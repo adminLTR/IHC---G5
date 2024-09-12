@@ -23,7 +23,7 @@
 | RF16 | La aplicación debe visualizar información de la temperatura, humedad y calidad del aire del hogar | Funcional | Alta |
 | RF17 | La aplicación debe enviar notificaciones en caso de anomalias en los valores detectados de temperatura, humedad y calidad del aire | Funcional | Alta |
 | RF18 | El sistema debe permitir un sistema de riego inteligente y programable | Funcional | Media |
-
+| RF19 | El sistema debe realizar una limpieza de datos antiguos de la metricas cada 2 meses | Funcional | Media |
 
 
 ## Requisitos no funcionales
