@@ -1,4 +1,4 @@
-# IHC S3 - G5 (Interacción Hombre Computador)
+# IHC - G5 (Interacción Hombre Computador)
 ## Sistema de hogar domótico con aplicación móvil
 ### Integrantes
 - La Torre Romero, Jose Luis
