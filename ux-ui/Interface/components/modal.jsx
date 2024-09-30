@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, Text, TouchableOpacity, Image, Button, StyleSheet } from 'react-native';
+import { Modal, View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 const x_img = require('../img/oshawott.png');
 export function FunctionModal({title, content, visible, onClose }) {

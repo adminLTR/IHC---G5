@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
-const user_img = require('../img/red.png')
-const notifications_img = require('../img/unown.png');
-const menu_img = require('../img/rotom_dex.png');
+import IconMenu from 'react-native-vector-icons/FontAwesome5';
+import IconAlerts from 'react-native-vector-icons/Ionicons';
+import IconUser from 'react-native-vector-icons/FontAwesome';
+
 
 export function Header() {
   const handleMenuButtonPress = () => {
@@ -21,17 +22,22 @@ export function Header() {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handleMenuButtonPress}>
-        <Image source={menu_img} style={styles.icon} />
+        <IconMenu name="bars" size={38} color="black" />
       </TouchableOpacity>
       
       <View style={styles.rightButtonsContainer}>
-        <TouchableOpacity onPress={handleUserButtonPress}>
-            <Image source={notifications_img} style={styles.icon} />
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity onPress={handleNotificationButtonPress}>
+            <IconAlerts name="notifications" size={38} color="black" />
+          </TouchableOpacity>
+        </View>
         
-        <TouchableOpacity onPress={handleNotificationButtonPress}>
-            <Image resizeMode="contain" source={user_img} style={styles.icon} />
-        </TouchableOpacity>
+        <View style={styles.rightButton}>
+          <TouchableOpacity onPress={handleUserButtonPress}>
+            <IconUser name="user" size={38} color="black" />
+          </TouchableOpacity>
+        </View>
+
       </View>
     </View>
   );
@@ -44,15 +50,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     backgroundColor: '#fff',
+    marginBottom: 10
   },
 
   rightButtonsContainer: {
     flexDirection: 'row',
   },
 
-  icon: {
-    
-    width: 50,
-    height: 50,
-    }
+  rightButton: {
+    paddingLeft: 10
+  },
 });

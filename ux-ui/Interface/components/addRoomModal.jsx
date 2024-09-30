@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { FunctionModal } from './modal';
 import { NumericInput } from './numericalInput';
+import { useToast } from 'react-native-toast-notifications';
 
-export function AddModal({ visible, onClose }) {
+export function AddModal({ visible, onClose, onConfirm }) {
     const [name, setName] = useState('');
     const [floor, setFloor] = useState(1);
+    const toast = useToast();
 
     const handleSubmit = () => {
-        Alert.alert('Datos enviados', `Nombre: ${name}, Piso: ${floor}`);
+        if (name.trim() === '') {
+            toast.show('El nombre de la habitación no puede estar vacío', {
+                type: 'danger',
+            });
+            return;
+        }
+        
+        onConfirm({ name, floor }); // Enviar los datos al componente padre
+        
+        setName('');
+        setFloor(1);
+
         onClose();
     };
 
@@ -91,17 +104,16 @@ const styles = StyleSheet.create({
     },
     submitButton: {
         backgroundColor: 'green',
-        marginTop:5,
+        marginTop: 5,
         padding: 3,
         borderRadius: 5,
         alignItems: 'center',
-        marginHorizontal:50,
+        marginHorizontal: 50,
         width: '60%',
     },
     buttonText: {
         color: '#fff',
         fontSize: 24,
         fontWeight: 'bold',
-
     },
 });

@@ -1,23 +1,20 @@
-
 import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Section } from '../components/section';
 import { ControlButton } from '../components/controlButton';
 import { AddModal } from '../components/addRoomModal'; 
+import { useToast } from 'react-native-toast-notifications';
+import { useNavigation } from '@react-navigation/native';
 
-
-const add_img = require('../img/abra.png');
-const lights_img = require('../img/chandelure.png');
-const audio_img = require('../img/exploud.png');
-const camara_img = require('../img/detective_pikachu.png');
-const fridge_img = require('../img/rotom_frio.png');
-const door_img = require('../img/starly.png');
-const irrigation_img = require('../img/vaporeon.png');
+import IconAdd from 'react-native-vector-icons/Ionicons';
 
 export function Main() {
     const insets = useSafeAreaInsets();
     const [modalVisible, setModalVisible] = useState(false);
+    const [rooms, setRooms] = useState([]); // Inicialmente vacío
+    const toast = useToast();
+    const navigation = useNavigation();
 
     const handleAddFunction = () => {
         setModalVisible(true);
@@ -27,47 +24,47 @@ export function Main() {
         setModalVisible(false);
     };
 
-    // Definir los botones de cada sección
-    const kitchenButtons = [
-        { icon: lights_img, label: "Luces" },
-        { icon: audio_img, label: "Audio" },
-        { icon: camara_img, label: "Cámara" },
-        { icon: fridge_img, label: "Refrigerador" },
-        { icon: audio_img, label: "Audio" },
-        { icon: camara_img, label: "Cámara" },
-        { icon: fridge_img, label: "Refrigerador" },
-        { icon: audio_img, label: "Audio" },
-        { icon: camara_img, label: "Cámara" },
-        { icon: fridge_img, label: "Refrigerador" },
+   const addNewRoom = (newRoom) => {
+    const defaultButtons = [
+        {
+            icon: <IconAdd name="add-circle-sharp" size={80} color="black" />,
+            label: null,
+            onPress: () => navigation.navigate('NewDevice'),
+        },
     ];
-
-    const exteriorButtons = [
-        { icon: door_img, label: "Puerta 1" },
-        { icon: irrigation_img, label: "Riego" },
-        { icon: camara_img, label: "Cámara" },
-    ];
+    setRooms([...rooms, { name: newRoom.name, buttons: defaultButtons }]);
+    toast.show('Habitación agregada', { type: 'success' });
+};
 
     return (
         <View style={[styles.container, { paddingBottom: insets.bottom }]}>
-            <Section title="Cocina">
-                {kitchenButtons.map((button, index) => (
-                    <ControlButton key={index} iconSource={button.icon} label={button.label} />
-                ))}
-                <ControlButton iconSource={add_img} label={null} />
-            </Section>
-            
-            <Section title="Exterior">
-                {exteriorButtons.map((button, index) => (
-                    <ControlButton key={index} iconSource={button.icon} label={button.label} />
-                ))}
-                <ControlButton iconSource={add_img} label={null} />
-            </Section>
+            {rooms.length === 0 ? (
+                // Mostrar mensaje si no hay habitaciones
+                <View style={styles.emptyContainer}>
+                    <Text style={styles.emptyText}>Agrega tu primera habitación</Text>
+                </View>
+            ) : (
+                // Si hay habitaciones, renderizar la lista
+                <ScrollView>
+                    {rooms.map((room, index) => (
+                        <Section key={index} title={room.name}>
+                            {room.buttons.map((button, btnIndex) => (
+                                <ControlButton key={btnIndex} iconSource={button.icon} label={button.label} onPress={button.onPress} />
+                            ))}
+                        </Section>
+                    ))}
+                </ScrollView>
+            )}
 
             <TouchableOpacity style={styles.addRoomButton} onPress={handleAddFunction}>
                 <Text style={styles.addRoomText}>+ Agregar habitación</Text>
             </TouchableOpacity>
 
-            <AddModal visible={modalVisible} onClose={closeModal} />
+            <AddModal 
+                visible={modalVisible} 
+                onClose={closeModal} 
+                onConfirm={addNewRoom} 
+            />
         </View>
     );
 }
@@ -78,12 +75,23 @@ const styles = StyleSheet.create({
         padding: 16,
         backgroundColor: '#fff',
     },
+    emptyContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    emptyText: {
+        fontSize: 32,
+        maxWidth: '50%',
+        color: '#aaa',
+        textAlign: 'center'
+    },
     addRoomButton: {
         backgroundColor: 'black',
         paddingVertical: 15,
         paddingHorizontal: 20,
         borderRadius: 30,
-        marginTop: 20,
+        marginBottom: 20,
         justifyContent: 'center',
         alignItems: 'center',
     },
