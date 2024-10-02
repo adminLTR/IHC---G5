@@ -3,6 +3,7 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-nativ
 import { FunctionModal } from './modal';
 import { NumericInput } from './numericalInput';
 import { useToast } from 'react-native-toast-notifications';
+import FormStyle from './formStyle'; 
 
 export function AddModal({ visible, onClose, onConfirm }) {
     const [name, setName] = useState('');
@@ -30,32 +31,32 @@ export function AddModal({ visible, onClose, onConfirm }) {
             title="Añadir Habitación"
             content={
                 <View style={styles.content}>
-                    <View style={styles.form}>
-                        <View style={styles.column1}>
-                            <Text style={styles.form_text}>Nombre</Text>
-                        </View>
-                        <View style={styles.column2}>
+                    <FormStyle
+                        label="Nombre"
+                        content={
                             <TextInput
                                 style={styles.input}
                                 value={name}
                                 onChangeText={setName}
                                 placeholder="Nombre habitación"
                             />
-                        </View>
-                    </View>
-                    <View style={styles.form}>
-                        <View style={styles.column1}>
-                            <Text style={styles.form_text}>Piso</Text>
-                        </View>
-                        <View style={styles.column2}>
+                        }
+                    />
+
+                    <FormStyle
+                        label="Piso"
+                        content={
                             <NumericInput 
-                                initialValue={1} 
-                                min={1} 
-                                max={7} 
+                                value={floor} 
                                 onValueChange={setFloor}
+                                min={1} 
+                                max={7}
+                                step={1} 
+                                
                             />
-                        </View>
-                    </View>
+                        }
+                    />
+
                     <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
                         <Text style={styles.buttonText}>Aceptar</Text>
                     </TouchableOpacity>
@@ -74,25 +75,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         paddingHorizontal: 10,
         paddingBottom: 10,
-    },
-    form: {
-        flexDirection: 'row',
-        width: '100%',
-        alignItems: 'flex-start',
-        paddingHorizontal: 10,
-        marginBottom: 10,
-    },
-    column1: {
-        flex: 1,
-    },
-    column2: {
-        flex: 2,
-    },
-    form_text: {
-        marginVertical: 10,
-        fontSize: 18,
-        textAlign: 'right',
-        paddingRight: 8,
     },
     input: {
         height: 40,

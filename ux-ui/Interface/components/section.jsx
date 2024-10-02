@@ -8,7 +8,8 @@ export function Section({ title, children }) {
       <ScrollView
         horizontal={false}
         contentContainerStyle={styles.row}
-        showsVerticalScrollIndicator={true}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
       >
         {children}
       </ScrollView>

@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export function NumericInput({ initialValue = 1, min = 1, max = 7 }) {
-    const [value, setValue] = useState(initialValue);
-
+export function NumericInput({ 
+    value, 
+    onValueChange, 
+    min = 1, 
+    max = 7, 
+    step = 1
+}) {
     const increment = () => {
-        if (value < max) {
-            setValue(value + 1);
+        if (value + step <= max) {
+            onValueChange(value + step);
         }
     };
 
     const decrement = () => {
-        if (value > min) {
-            setValue(value - 1);
+        if (value - step >= min) {
+            onValueChange(value - step);
         }
     };
 
@@ -30,6 +34,7 @@ export function NumericInput({ initialValue = 1, min = 1, max = 7 }) {
         </View>
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modal: {
-        width: 300,
+        width: 310,
         padding: 20,
         backgroundColor: 'white',
         borderRadius: 10,
