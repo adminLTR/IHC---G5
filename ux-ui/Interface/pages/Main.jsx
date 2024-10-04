@@ -12,7 +12,7 @@ import IconAdd from 'react-native-vector-icons/Ionicons';
 export function Main() {
     const insets = useSafeAreaInsets();
     const [modalVisible, setModalVisible] = useState(false);
-    const [rooms, setRooms] = useState([]); // Inicialmente vacío
+    const [roomsByFloor, setRoomsByFloor] = useState({}); // Objeto para organizar las habitaciones por piso
     const toast = useToast();
     const navigation = useNavigation();
 
@@ -24,34 +24,48 @@ export function Main() {
         setModalVisible(false);
     };
 
-   const addNewRoom = (newRoom) => {
-    const defaultButtons = [
-        {
-            icon: <IconAdd name="add-circle-sharp" size={80} color="black" />,
-            label: null,
-            onPress: () => navigation.navigate('NewDevice'),
-        },
-    ];
-    setRooms([...rooms, { name: newRoom.name, buttons: defaultButtons }]);
-    toast.show('Habitación agregada', { type: 'success' });
-};
+    const addNewRoom = (newRoom) => {
+        const defaultButtons = [
+            {
+                icon: <IconAdd name="add-circle-outline" size={80} color="black" />,
+                label: null,
+                onPress: () => navigation.navigate('NewDevice'),
+            },
+        ];
+
+        // Si el piso ya existe, agregamos la nueva habitación; si no, lo creamos.
+        setRoomsByFloor((prevRoomsByFloor) => {
+            const roomsInFloor = prevRoomsByFloor[newRoom.floor] || [];
+            return {
+                ...prevRoomsByFloor,
+                [newRoom.floor]: [...roomsInFloor, { name: newRoom.name, buttons: defaultButtons }],
+            };
+        });
+
+        toast.show('Habitación agregada', { type: 'success' });
+    };
 
     return (
         <View style={[styles.container, { paddingBottom: insets.bottom }]}>
-            {rooms.length === 0 ? (
+            {Object.keys(roomsByFloor).length === 0 ? (
                 // Mostrar mensaje si no hay habitaciones
                 <View style={styles.emptyContainer}>
                     <Text style={styles.emptyText}>Agrega tu primera habitación</Text>
                 </View>
             ) : (
-                // Si hay habitaciones, renderizar la lista
+                // Si hay habitaciones, renderizar la lista segmentada por piso
                 <ScrollView>
-                    {rooms.map((room, index) => (
-                        <Section key={index} title={room.name}>
-                            {room.buttons.map((button, btnIndex) => (
-                                <ControlButton key={btnIndex} iconSource={button.icon} label={button.label} onPress={button.onPress} />
+                    {Object.keys(roomsByFloor).map((floor) => (
+                        <View key={floor}>
+                            <Text style={styles.floorTitle}>Piso {floor}</Text>
+                            {roomsByFloor[floor].map((room, index) => (
+                                <Section key={index} title={room.name}>
+                                    {room.buttons.map((button, btnIndex) => (
+                                        <ControlButton key={btnIndex} iconSource={button.icon} label={button.label} onPress={button.onPress} />
+                                    ))}
+                                </Section>
                             ))}
-                        </Section>
+                        </View>
                     ))}
                 </ScrollView>
             )}
@@ -85,6 +99,11 @@ const styles = StyleSheet.create({
         maxWidth: '50%',
         color: '#aaa',
         textAlign: 'center'
+    },
+    floorTitle: {
+        fontSize: 28,
+        fontWeight: 'bold',
+        marginVertical: 10,
     },
     addRoomButton: {
         backgroundColor: 'black',
