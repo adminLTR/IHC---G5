@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import IconBack from 'react-native-vector-icons/Ionicons';
-import IconDevice from 'react-native-vector-icons/FontAwesome';
+import IconDevice from 'react-native-vector-icons/MaterialIcons';
 import FormStyle from '../components/formStyle';
 import ToggleButton from '../components/toggleButtons';
 import VolumeSlider from '../components/volumeSlider';
@@ -42,14 +42,14 @@ const NewDevice = () => {
     };
 
     const deviceTypes = [
-        { id: 1, name: 'Luz', icon: 'lightbulb-o' },
-        { id: 2, name: 'Termo', icon: 'thermometer-three-quarters' },
+        { id: 1, name: 'Luz', icon: 'lightbulb' },
+        { id: 2, name: 'Termo', icon: 'thermostat' },
         { id: 3, name: 'Cámara', icon: 'camera' },
-        { id: 4, name: 'Puerta', icon: 'home' },
-        { id: 5, name: 'Ventilador', icon: 'snowflake-o' },
-        { id: 6, name: 'Cerradura', icon: 'unlock-alt' },
-        { id: 7, name: 'Sensor de movimiento', icon: 'street-view' },
-        { id: 8, name: 'Altavoz', icon: 'music' },
+        { id: 4, name: 'Puerta', icon: 'sensor-door' },
+        { id: 5, name: 'Ventilador', icon: 'ac-unit' },
+        { id: 6, name: 'Cerradura', icon: 'lock' },
+        { id: 7, name: 'Sensor de movimiento', icon: 'alarm' },
+        { id: 8, name: 'Altavoz', icon: 'speaker' },
     ];
 
     const colors = [

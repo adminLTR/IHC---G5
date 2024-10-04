@@ -10,6 +10,7 @@ export function Section({ title, children }) {
         contentContainerStyle={styles.row}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
+        nestedScrollEnabled={true}
       >
         {children}
       </ScrollView>

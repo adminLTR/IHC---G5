@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, StyleSheet, Text, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Section } from '../components/section';
@@ -8,13 +8,54 @@ import { useToast } from 'react-native-toast-notifications';
 import { useNavigation } from '@react-navigation/native';
 
 import IconAdd from 'react-native-vector-icons/Ionicons';
+import IconCustom from 'react-native-vector-icons/MaterialIcons'; // Ejemplo de otro set de iconos
 
 export function Main() {
+
+    
     const insets = useSafeAreaInsets();
     const [modalVisible, setModalVisible] = useState(false);
-    const [roomsByFloor, setRoomsByFloor] = useState({}); // Objeto para organizar las habitaciones por piso
+    const [roomsByFloor, setRoomsByFloor] = useState({});
     const toast = useToast();
     const navigation = useNavigation();
+
+    const buttonColors = [
+        '#ff66c4', '#ff9966', '#ffcc99', '#ffffcc', '#99ffcc', 
+        '#66ffff', '#ccffff', '#99ccff', '#ff66c4', '#ff9966',
+         '#ffcc99', '#ffffcc', '#fff', 
+    ];
+
+    // Crear habitación con 14 botones al cargar la app
+    useEffect(() => {
+        const defaultButtons = [
+            { icon: <IconCustom name="lightbulb" size={50} color="black" />, label: 'Luz' },
+            { icon: <IconCustom name="tv" size={50} color="black" />, label: 'TV' },
+            { icon: <IconCustom name="ac-unit" size={50} color="black" />, label: 'Aire' },
+            { icon: <IconCustom name="speaker" size={50} color="black" />, label: 'Parlante' },
+            { icon: <IconCustom name="router" size={50} color="black" />, label: 'Router' },
+            { icon: <IconCustom name="lock" size={50} color="black" />, label: 'Cerradura' },
+            { icon: <IconCustom name="camera" size={50} color="black" />, label: 'Cámara' },
+            { icon: <IconCustom name="sensor-door" size={50} color="black" />, label: 'Sensor\nPuerta' },
+            { icon: <IconCustom name="thermostat" size={50} color="black" />, label: 'Termostato' },
+            { icon: <IconCustom name="blender" size={50} color="black" />, label: 'Licuadora' },
+            { icon: <IconCustom name="alarm" size={50} color="black" />, label: 'Alarma' },
+            { icon: <IconCustom name="microwave" size={50} color="black" />, label: 'Microondas' },
+            // Botón de navegación a NewDevice
+            { 
+                icon: <IconAdd name="add-circle-outline" size={70} color="black" />, 
+                label: 'Añadir\nDispositivo',
+                buttonColor: 'transparent',
+                onPress: () => navigation.navigate('NewDevice'),
+            },
+        ].map((button, index) => ({
+            ...button,
+            buttonColor: buttonColors[index % buttonColors.length], // Asignar color a cada botón
+        }));
+
+        setRoomsByFloor({
+            1: [{ name: 'Habitación 1', buttons: defaultButtons }]
+        });
+    }, []);
 
     const handleAddFunction = () => {
         setModalVisible(true);
@@ -27,8 +68,8 @@ export function Main() {
     const addNewRoom = (newRoom) => {
         const defaultButtons = [
             {
-                icon: <IconAdd name="add-circle-outline" size={80} color="black" />,
-                label: null,
+                icon: <IconAdd name="add-circle-outline" size={70} color="black" />,
+                label: 'Añadir\nDispositivo',
                 onPress: () => navigation.navigate('NewDevice'),
             },
         ];
@@ -61,7 +102,7 @@ export function Main() {
                             {roomsByFloor[floor].map((room, index) => (
                                 <Section key={index} title={room.name}>
                                     {room.buttons.map((button, btnIndex) => (
-                                        <ControlButton key={btnIndex} iconSource={button.icon} label={button.label} onPress={button.onPress} />
+                                        <ControlButton key={btnIndex} iconSource={button.icon} label={button.label} buttonColor={button.buttonColor} onPress={button.onPress || null} />
                                     ))}
                                 </Section>
                             ))}

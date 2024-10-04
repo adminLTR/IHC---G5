@@ -1,29 +1,33 @@
 import React from 'react';
-import { TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Image, Text, StyleSheet, View } from 'react-native';
 
-export function ControlButton({ iconSource, label, onPress }) {
+export function ControlButton({ iconSource, label, onPress, buttonColor }) {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      {typeof iconSource === 'string' ? (
-        <Image source={{ uri: iconSource }} style={styles.icon} />
-      ) : (
-        iconSource // Renderiza el componente de icono si no es una string
-      )}
+    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+      <View style={[styles.iconContainer, { backgroundColor: buttonColor }]}>
+        {typeof iconSource === 'string' ? (
+          <Image source={{ uri: iconSource }} style={styles.icon} />
+        ) : (
+          iconSource
+        )}
+      </View>
       <Text style={styles.label}>{label}</Text>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  button: {
+  buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '30%',
-    marginVertical: 5,
+    margin: 5,
   },
-  icon: {
-    width: 80,
-    height: 80,
+  iconContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+    width: 70,      
+    height: 70,
   },
   label: {
     marginTop: 5,
