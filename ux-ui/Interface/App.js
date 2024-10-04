@@ -1,4 +1,3 @@
-// App.jsx
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -11,7 +10,6 @@ import IconNormal from 'react-native-vector-icons/Entypo';
 
 import AppNavigator from './AppNavigator';
 
-import { Main } from './pages/Main';
 import { Header } from './components/header';
 
 export default function App() {

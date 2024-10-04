@@ -8,7 +8,7 @@ import { useToast } from 'react-native-toast-notifications';
 import { useNavigation } from '@react-navigation/native';
 
 import IconAdd from 'react-native-vector-icons/Ionicons';
-import IconCustom from 'react-native-vector-icons/MaterialIcons'; // Ejemplo de otro set de iconos
+import IconCustom from 'react-native-vector-icons/MaterialIcons';
 
 export function Main() {
 
@@ -25,7 +25,7 @@ export function Main() {
          '#ffcc99', '#ffffcc', '#fff', 
     ];
 
-    // Crear habitación con 14 botones al cargar la app
+   
     useEffect(() => {
         const defaultButtons = [
             { icon: <IconCustom name="lightbulb" size={50} color="black" />, label: 'Luz' },
@@ -40,7 +40,7 @@ export function Main() {
             { icon: <IconCustom name="blender" size={50} color="black" />, label: 'Licuadora' },
             { icon: <IconCustom name="alarm" size={50} color="black" />, label: 'Alarma' },
             { icon: <IconCustom name="microwave" size={50} color="black" />, label: 'Microondas' },
-            // Botón de navegación a NewDevice
+            
             { 
                 icon: <IconAdd name="add-circle-outline" size={70} color="black" />, 
                 label: 'Añadir\nDispositivo',
@@ -49,7 +49,7 @@ export function Main() {
             },
         ].map((button, index) => ({
             ...button,
-            buttonColor: buttonColors[index % buttonColors.length], // Asignar color a cada botón
+            buttonColor: buttonColors[index % buttonColors.length], 
         }));
 
         setRoomsByFloor({
@@ -74,7 +74,7 @@ export function Main() {
             },
         ];
 
-        // Si el piso ya existe, agregamos la nueva habitación; si no, lo creamos.
+       
         setRoomsByFloor((prevRoomsByFloor) => {
             const roomsInFloor = prevRoomsByFloor[newRoom.floor] || [];
             return {
@@ -89,12 +89,10 @@ export function Main() {
     return (
         <View style={[styles.container, { paddingBottom: insets.bottom }]}>
             {Object.keys(roomsByFloor).length === 0 ? (
-                // Mostrar mensaje si no hay habitaciones
                 <View style={styles.emptyContainer}>
                     <Text style={styles.emptyText}>Agrega tu primera habitación</Text>
                 </View>
             ) : (
-                // Si hay habitaciones, renderizar la lista segmentada por piso
                 <ScrollView>
                     {Object.keys(roomsByFloor).map((floor) => (
                         <View key={floor}>

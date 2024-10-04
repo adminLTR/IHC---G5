@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
     dropdown: {
         backgroundColor: '#fff',
         borderRadius: 5,
-        marginTop: 5, // Espacio entre el botón y la lista
+        marginTop: 5,
         borderWidth: 1,
         borderColor: '#ccc',
         width: '100%',
-        maxHeight: 150, // Limitar la altura máxima del dropdown
+        maxHeight: 150, 
     },
     option: {
         padding: 10,

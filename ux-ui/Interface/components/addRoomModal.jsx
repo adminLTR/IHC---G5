@@ -18,7 +18,7 @@ export function AddModal({ visible, onClose, onConfirm }) {
             return;
         }
         
-        onConfirm({ name, floor }); // Enviar los datos al componente padre
+        onConfirm({ name, floor }); 
         
         setName('');
         setFloor(1);

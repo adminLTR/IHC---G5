@@ -16,8 +16,8 @@ const VolumeSlider = ({ value, onValueChange }) => {
                 style={styles.slider}
                 minimumValue={0}
                 maximumValue={1}
-                value={value} // Use the value prop
-                onValueChange={onValueChange} // Use the onValueChange prop
+                value={value}
+                onValueChange={onValueChange}
                 onSlidingStart={() => setIsSliding(true)}
                 onSlidingComplete={() => setIsSliding(false)}
                 minimumTrackTintColor="black"

@@ -13,7 +13,6 @@ import StandarButton from '../components/standardButton';
 const NewDevice = () => {
     const navigation = useNavigation();
 
-    // Definir los estados
     const [name, setName] = useState('');
     const [activeDevice, setActiveDevice] = useState(null);
     const [activeColor, setActiveColor] = useState(null);
@@ -29,7 +28,7 @@ const NewDevice = () => {
     const [angularSpeed, setAngularSpeed] = useState(0);
     const [selectedOption, setSelectedOption] = useState(null);
 
-    // Volver a la pantalla principal
+
     const handleBackFunction = () => {
         navigation.navigate('Main');
     };
@@ -69,7 +68,6 @@ const NewDevice = () => {
         { label: '120 fps', value: '120' },
     ];
 
-    // Selección de dispositivo y color
     const handleDeviceSelect = (id) => {
         setActiveDevice(activeDevice === id ? null : id);
     };
@@ -78,7 +76,6 @@ const NewDevice = () => {
         setActiveColor(activeColor === id ? null : id);
     };
 
-    // Acciones del botón Aceptar
     const handleAccept = () => {
         const selectedValues = {
             name,
@@ -97,7 +94,6 @@ const NewDevice = () => {
         
         console.log('Valores seleccionados:', selectedValues);
 
-        // Resetear todos los estados a los valores por defecto
         setName('');
         setActiveDevice(null);
         setActiveColor(null);
