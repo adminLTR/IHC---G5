@@ -9,8 +9,10 @@ import VolumeSlider from '../components/volumeSlider';
 import { NumericInput } from '../components/numericalInput';
 import CustomSelect from '../components/customSelect';
 import StandarButton from '../components/standardButton';
+import { useToast } from 'react-native-toast-notifications';
 
 const NewDevice = () => {
+    const toast = useToast();
     const navigation = useNavigation();
 
     const [name, setName] = useState('');
@@ -109,6 +111,7 @@ const NewDevice = () => {
         setAngularSpeed(0);
         setSelectedOption(null);
 
+        toast.show('Dispositivo agregado', { type: 'success' });
         navigation.navigate('Main');
     };
 
