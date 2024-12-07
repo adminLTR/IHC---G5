@@ -7,6 +7,14 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from rest_framework.response import Response
+from django.contrib.auth.models import User
+from .serializers import *
+from .models import *
+from rest_framework import viewsets, status
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from rest_framework.response import Response
 
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):

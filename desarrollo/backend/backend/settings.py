@@ -16,6 +16,11 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
+import os
+# import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,11 +36,13 @@ SECRET_KEY = 'django-insecure-kcm2n&+9q(5*qy@@2*8uq6vc9(1^+szz)&^*2afsuk01tt(2i*
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', 'ihc-backend-production.up.railway.app', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', 'ihc-backend-production.up.railway.app', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,12 +54,18 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'api',
+    'whitenoise.runserver_nostatic',
+    'corsheaders',
+    'rest_framework',
+    'api',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

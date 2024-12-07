@@ -14,6 +14,21 @@ class Casa(models.Model):
         verbose_name = "Casa"
         verbose_name_plural = "Casas"
 
+from django.contrib.auth.models import User
+from django.utils.safestring import mark_safe
+
+class Casa(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
+    longitud = models.FloatField(null=True, blank=True)
+    latitud = models.FloatField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.usuario} house"
+    
+    class Meta:
+        verbose_name = "Casa"
+        verbose_name_plural = "Casas"
+
 class Habitacion(models.Model):
     nombre = models.CharField(max_length=100, null=False, blank=False)
     piso = models.PositiveIntegerField()
@@ -28,6 +43,7 @@ class Habitacion(models.Model):
 
 class TipoDispositivo(models.Model):
     nombre = models.CharField(max_length=100)
+    descripcion = models.TextField(null=True)
     descripcion = models.TextField(null=True)
     image = models.ImageField(upload_to="assets/tipo_dispositivos")
 
